@@ -1,5 +1,4 @@
 import os
-import sys
 import subprocess
 from paths import BASE
 from pytube import YouTube
@@ -7,9 +6,9 @@ from pytube import YouTube
 def get_artwork(musician: str, title: str) -> None:
     raise NotImplementedError
 
-def main():
+def download() -> int:
     # Assign variables
-    url = sys.argv[1]
+    url = input("Video URL: ")
     
     # Download video as mp3
     yt = YouTube(url)
@@ -51,6 +50,19 @@ def main():
     
     # Result of success
     print(f"{new_file} has been successfully downloaded.")
+
+    return 0
+
+def main() -> int:
+    running = True
+
+    while running:
+        download()
+        response = input("Do you want to download another song? [y/N]\n")
+        if 'n' in response.lower():
+            running = False
+
+    return 0
 
 
 if __name__ == "__main__":
