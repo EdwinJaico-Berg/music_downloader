@@ -7,18 +7,6 @@ from pytube import YouTube
 def get_artwork(musician: str, title: str) -> None:
     raise NotImplementedError
 
-def convert_file_path(path: str) -> str:
-    new_path = ""
-
-    for l in path:
-        if l == " ":
-            new_path += "\ "
-        else:
-            new_path += l
-
-    return new_path
-
-
 def main():
     # Assign variables
     url = sys.argv[1]
