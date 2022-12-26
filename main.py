@@ -7,6 +7,18 @@ from pytube import YouTube
 def get_artwork(musician: str, title: str) -> None:
     raise NotImplementedError
 
+def convert_file_path(path: str) -> str:
+    new_path = ""
+
+    for l in path:
+        if l == " ":
+            new_path += "\ "
+        else:
+            new_path += l
+
+    return new_path
+
+
 def main():
     # Assign variables
     url = sys.argv[1]
@@ -18,15 +30,15 @@ def main():
     audio = yt.streams.get_audio_only()
 
     # Get input (Musician, Song Title)
-    artist = str(input("Artist: "))
-    title = str(input("Title: ")) 
+    artist = input("Artist: ")
+    title = input("Title: ")
 
     # Create destination path
     base = BASE
     dir_path = base + artist
 
     # Check whether file already exists
-    file_path = dir_path + "/" + title + ".mp3"
+    file_path = f"{dir_path}/{title}.mp3"
    
     if os.path.isfile(file_path):
         download = str(input("File already exists. Do you want to continue? [y/N]\n"))
@@ -44,12 +56,12 @@ def main():
     new_file = f"{root}.mp3"
     
     # Convert the file using ffmpeg
-    subprocess.run(f'ffmpeg -i {out_file} {new_file}', shell=True)
+    subprocess.run(["ffmpeg", "-i", out_file, new_file])
 
     # Remove the .mp4 file
     os.remove(out_file)
     
-    # result of success
+    # Result of success
     print(f"{new_file} has been successfully downloaded.")
 
 
