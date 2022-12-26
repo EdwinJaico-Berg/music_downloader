@@ -1,10 +1,11 @@
 import os
 import subprocess
+import requests
 from paths import BASE
 from pytube import YouTube
 
-def get_artwork(musician: str, title: str) -> None:
-    raise NotImplementedError
+def get_artwork(musician: str, title: str, yt: YouTube) -> int:
+    return 0
 
 def download() -> int:
     # Assign variables
